@@ -10,41 +10,41 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.ConcurrentHashMap
 
 @SpringBootApplication
-class StockServiceApplication
+class HwProjServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<StockServiceApplication>(*args)
+    runApplication<HwProjServiceApplication>(*args)
 }
 
 @RestController
 class RestController(val hwProjService: HwProjService) {
 
-    @PostMapping(value = ["/{student}/register/{subject}"])
+    @PostMapping(value = ["/students/{student}/register/{subject}"])
     fun registerStudentOnSubject(@PathVariable student: String, @PathVariable subject: String) =
         hwProjService.registerStudentOnSubject(student, subject)
 
-    @GetMapping(value = ["/{student}/marks"])
+    @GetMapping(value = ["/students/{student}/marks"])
     fun getStudentMarks(@PathVariable student: String) =
         hwProjService.getMarks(student)
 
-    @GetMapping(value = ["/{student}/marks/{subject}"])
+    @GetMapping(value = ["/students/{student}/marks/{subject}"])
     fun getStudentMarksOnSubject(@PathVariable student: String, @PathVariable subject: String) =
         hwProjService.getMarksFromSubject(student, subject)
 
-    @GetMapping(value = ["/{student}/marks/{subject}/avg"])
+    @GetMapping(value = ["/students/{student}/marks/{subject}/avg"])
     fun getStudentMarksOnSubjectAvg(@PathVariable student: String, @PathVariable subject: String) =
         hwProjService.getMarksFromSubjectAvg(student, subject)
 
-    @PostMapping(value = ["/{teacher}/marks/{student}/{mark}"])
+    @PostMapping(value = ["/teachers/{teacher}/marks/{student}/{mark}"])
     fun setMarkToStudent(@PathVariable teacher: String,
                          @PathVariable student: String,
                          @PathVariable mark: Int) = hwProjService.setMarkToStudent(teacher, student, mark)
 
-    @PostMapping(value = ["/{teacher}/register/{subject}"])
+    @PostMapping(value = ["/teachers/{teacher}/register/{subject}"])
     fun addSubject(@PathVariable teacher: String,
                          @PathVariable subject: String) = hwProjService.addSubject(teacher, subject)
 
-    @GetMapping(value = ["/{teacher}/marks/"])
+    @GetMapping(value = ["/teachers/{teacher}/marks/"])
     fun getMarksByTeacher(@PathVariable teacher: String) =
         hwProjService.getMarksByTeacher(teacher)
 
